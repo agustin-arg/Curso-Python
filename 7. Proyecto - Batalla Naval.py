@@ -30,7 +30,7 @@ class Ship:
         
 class Destroyer(Ship):
     def __init__(self):
-        super().__init__('destructor', 2)
+        super().__init__('Destructor', 2)
 
 class Submarine(Ship):
     def __init__(self):
@@ -46,5 +46,24 @@ class Player():
         self.board = [[' ' for _ in range(10)] for _ in range(10)]
         self.list_ships = []
         self.histboard = [[' ' for _ in range(10)] for _ in range(10)]
-    
-        
+    def place_ships(self):#Permite al jugador colocar sus barcos uno a uno pidiendo por consola la posición y orientación. Usa el método de cada barco para validar y marcar la posición.
+        ships = [Destroyer(),Submarine(),Battleship()]
+        for ship in ships:
+            while True:
+                print(f"{self.name}, coloca tu {ship.name} de tamaño {ship.size}.")
+                start_row = int(input("Fila inicial: "))
+                start_col = int(input("Columna inicial: "))
+                direction = input("Dirección (H para horizontal, V para vertical): ").upper()
+                if ship.place_ship(start_row, start_col, direction, self.board):
+                    self.list_ships.append(ship)
+                    self.print_board(self.board)
+                    break
+                else:
+                    print("Posición no válida. Inténtalo de nuevo.")
+            
+    def print_board (self) #Muestra el tablero en consola.
+        pass
+    def attack(self): #Permite atacar una posición del tablero enemigo. Marca agua (A) si no hay barco, impacto (T) si acierta. Si hunde un barco, lo indica. Evita atacar dos veces la misma posición.
+        pass
+    def all_ships_sunk(self): #Devuelve True si todos los barcos del jugador han sido hundidos.
+        pass
