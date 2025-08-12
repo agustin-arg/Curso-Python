@@ -11,10 +11,19 @@ class Ship:
                 return False
             else:
                 for i in range(self.size):
-                    if board[start_row,start_col+i] != ' ':
+                    if board[start_row][start_col+i] != ' ':
                         return False
-                    
-            
+                    positions.append((start_row,start_col+i))
+        elif direction == 'v':
+            if start_row + self.size > len(board[0]):
+                return False
+            else:
+                for i in range(self.size):
+                    if board[start_row+i][start_col] != ' ':
+                        return False
+                    positions.append((start_row+i,start_col))
+        else:
+            return False    
     def hit(self):
         self.hits += 1
         return self.hits == self.size
