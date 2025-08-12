@@ -61,8 +61,12 @@ class Player():
                 else:
                     print("Posición no válida. Inténtalo de nuevo.")
             
-    def print_board (self) #Muestra el tablero en consola.
-        pass
+    def print_board (self): #Muestra el tablero en consola.
+        for row in self.board:
+            list_board = ''
+            for i in row:
+                list_board += i
+            print(list_board)
     def attack(self): #Permite atacar una posición del tablero enemigo. Marca agua (A) si no hay barco, impacto (T) si acierta. Si hunde un barco, lo indica. Evita atacar dos veces la misma posición.
         pass
     def all_ships_sunk(self): #Devuelve True si todos los barcos del jugador han sido hundidos.
