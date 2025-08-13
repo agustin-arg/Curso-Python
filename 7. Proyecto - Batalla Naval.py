@@ -93,6 +93,9 @@ class Player():
                         print("Ya has atacado esta posición. Intenta de nuevo.")
             else:
                 print("Posición no válida. Intenta de nuevo.")
-    
     def all_ships_sunk(self): #Devuelve True si todos los barcos del jugador han sido hundidos.
-        pass
+        list_hits = [ship.hits == ship.size for ship in self.list_ships]
+        return list_hits == [True,True,True]
+    # La versión correcta es:
+    #     return all(ship.hits == ship.size for ship in self.list_ships)
+    
