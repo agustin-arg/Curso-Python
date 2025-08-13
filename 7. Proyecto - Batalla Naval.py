@@ -67,7 +67,32 @@ class Player():
             for i in row:
                 list_board += i
             print(list_board)
-    def attack(self): #Permite atacar una posición del tablero enemigo. Marca agua (A) si no hay barco, impacto (T) si acierta. Si hunde un barco, lo indica. Evita atacar dos veces la misma posición.
-        pass
+    # def print_board(self):  # Muestra el tablero en consola. Esta versión es más "pythónica" y sencilla.
+    #     for row in self.board:
+    #       print(" ".join(row))
+    def attack(self, opponent): #Permite atacar una posición del tablero enemigo. Marca agua (A) si no hay barco, impacto (T) si acierta. Si hunde un barco, lo indica. Evita atacar dos veces la misma posición.
+        while True: 
+            row_attack = int(input('ingrese el número de fila a atacar'))
+            column_attack = int(input('ingrese el número de columna a atacar'))
+            if 0 <= row_attack < 10 and 0 <= column_attack < 10:
+                if opponent.board[row_attack][column_attack] == ' ':
+                    print('AGUA!')
+                    self.histboard[row_attack][column_attack] == 'A'
+                    opponent.board[row_attack][column_attack] == 'A'
+                elif opponent.board[row_attack][column_attack] != 'A':
+                    print('TOCADO!')
+                    self.histboard[row_attack][column_attack] == 'T'
+                    opponent.board[row_attack][column_attack] == 'T'
+                    for ship in opponent.list_ships:
+                        if (row_attack,column_attack) in ship.positions:
+                            if ship.hit():
+                                print(f"¡Hundido! Has hundido el {ship.name}.")
+                        break
+                    break
+                else:
+                        print("Ya has atacado esta posición. Intenta de nuevo.")
+            else:
+                print("Posición no válida. Intenta de nuevo.")
+    
     def all_ships_sunk(self): #Devuelve True si todos los barcos del jugador han sido hundidos.
         pass
