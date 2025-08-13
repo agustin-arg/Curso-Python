@@ -1,9 +1,13 @@
 class Ship:
+    '''
+    Comportamiento de todos los barcos
+    '''
     def __init__(self,name,size):
         self.name = name
         self.size = size
         self.positions = []
         self.hits = 0
+
     def place_ship(self, start_row, start_col, direction, board):
         positions = []
         if direction == 'H':
@@ -29,28 +33,40 @@ class Ship:
             board[pos[0]][pos[1]] = self.name[0]
         self.positions = positions
         return True
+    
     def hit(self):
         self.hits += 1
         return self.hits == self.size
-        
+
+
+#Los tres tipos de barcos disponibles
 class Destroyer(Ship):
     def __init__(self):
         super().__init__('Destructor', 2)
 
+
 class Submarine(Ship):
     def __init__(self):
         super().__init__('Submarino', 3)
-        
+
+
 class Battleship(Ship):
     def __init__(self):
         super().__init__('Acorazado', 4)
-        
+
+
 class Player():
+    '''
+    Datos del jugador, Sus tableros y los impactos que recibio
+    Movimientos que puede hacer, poner sus barco y atacar
+    Comprobar si sigue en juego
+    '''
     def __init__(self,name):
         self.name = name
         self.board = [[' ' for _ in range(10)] for _ in range(10)]
         self.list_ships = []
         self.histboard = [[' ' for _ in range(10)] for _ in range(10)]
+
     def place_ships(self):
         ships = [Destroyer(),Submarine(),Battleship()]
         for ship in ships:
@@ -65,9 +81,11 @@ class Player():
                     break
                 else:
                     print("Posición no válida. Inténtalo de nuevo.")
+    
     def print_board(self):
         for row in self.board:
             print(" ".join(row))
+    
     def attack(self, opponent):
         while True:
             row_attack = int(input('ingrese el número de fila a atacar'))
@@ -92,14 +110,19 @@ class Player():
                     print("Ya has atacado esta posición. Intenta de nuevo.")
             else:
                 print("Posición no válida. Intenta de nuevo.")
+    
     def all_ships_sunk(self):
         return all(ship.hits == ship.size for ship in self.list_ships)
 
 
 class BattleshipGame:
+    '''
+    Controla el juego
+    '''
     def __init__(self):
         self.player1 = Player("Jugador 1")
         self.player2 = Player("Jugador 2")
+    
     def play(self):
         print("Bienvenido al juego de Batalla Naval!")
         print("Jugador 1 coloca sus barcos.")
