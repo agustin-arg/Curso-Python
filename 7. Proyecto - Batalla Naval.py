@@ -98,4 +98,25 @@ class Player():
         return list_hits == [True,True,True]
     # La versión correcta es:
     #     return all(ship.hits == ship.size for ship in self.list_ships)
-    
+    class BattleshipGame:
+        def __init__(self):
+            self.player1 = Player("Jugador 1")
+            self.player2 = Player("Jugador 2")
+        def play(self):
+            print("Bienvenido al juego de Batalla Naval!")
+            print("Jugador 1 coloca sus barcos.")
+            self.player1.place_ships()
+            print("Jugador 2 coloca sus barcos.")
+            self.player2.place_ships()
+            current_player = self.player1
+            opponent = self.player2
+            while True:
+                current_player.attack(opponent)
+                if opponent.all_ships_sunk():
+                    print('Ha ganado el juego el jugador:',{current_player.name})
+                    break
+                current_player,opponent = opponent,current_player
+
+    # Crear una instancia del juego y jugar
+game = BaseException()
+game.play()
